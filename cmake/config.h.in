@@ -1,0 +1,5 @@
+
+#cmakedefine01 YAE_LIB_OSX
+#cmakedefine01 YAE_LIB_IOS
+#cmakedefine01 YAE_LIB_WIN
+#cmakedefine01 YAE_LIB_X11

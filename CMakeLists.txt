@@ -15,6 +15,7 @@ file(GLOB YAE_SOURCES_COMMON src/YAE/*.cpp)
 file(GLOB YAE_HEADERS_COMMON src/YAE/*.h)
 
 add_library(YAE SHARED ${YAE_SOURCES_COMMON} ${YAE_HEADERS_COMMON})
+target_include_directories(YAE PRIVATE src)
 
 if (APPLE) 
 
@@ -30,6 +31,7 @@ if (APPLE)
         target_sources(YAE PRIVATE ${YAE_SOURCES_APPLE} ${YAE_HEADERS_APPLE})
 
         message(STATUS "YAE: Added OSX support.")
+        set(YAE_LIB_OSX 1)
 
     else () 
 
@@ -39,6 +41,7 @@ if (APPLE)
         target_sources(YAE PRIVATE ${YAE_SOURCES_IOS} ${YAE_HEADERS_IOS})
 
         message(STATUS "YAE: Added IOS support.")
+        set(YAE_LIB_IOS 1)
 
     endif ()
 
@@ -50,6 +53,7 @@ elseif (WIN32)
     target_sources(YAE PRIVATE ${YAE_SOURCES_WIN} ${YAE_HEADERS_WIN})
 
     message(STATUS "YAE: Added WIN support.")
+    set(YAE_LIB_WIN 1)
 
 else () 
 
@@ -57,4 +61,15 @@ else ()
     
 endif ()
 
+# Configures the platform header.
+configure_file(cmake/config.h.in configure.h)
+
+# Adds the header file to the target.
+target_sources(YAE PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/configure.h)
+
+# Adds the header to every upcoming targets.
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 install(TARGETS YAE DESTINATION ${YAE_BIN_DIR})
+
+add_subdirectory(tutorials/HelloWorld)
