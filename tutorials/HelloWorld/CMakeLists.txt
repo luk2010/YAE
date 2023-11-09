@@ -1,7 +1,6 @@
 
 add_executable(
     HelloWorld
-        MACOSX_BUNDLE
     main.cpp
 )
 

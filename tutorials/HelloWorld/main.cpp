@@ -11,9 +11,28 @@
 
 #include <YAE/YAE.h>
 
+class MainWin : public YAE::Window
+{
+public:
+    using YAE::Window::Window;
+    
+YAE_EVENTS:
+    void beforeClose() {
+        YAE::Application::Current().terminate();
+    }
+};
+
 class App : public YAE::Application 
 {
-
+    YAE::Ref < YAE::Window > mWindow;
+    
+protected:
+    void ready() {
+        mWindow = YAE::Make < MainWin >(YAE::Rect{
+            {}, { 1024, 768 }
+        });
+        mWindow->show();
+    }
 };
 
 int main() 

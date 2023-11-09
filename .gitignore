@@ -1,3 +1,4 @@
 bin
 build
 xcode
+.DS_Store

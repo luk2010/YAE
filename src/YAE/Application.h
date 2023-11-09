@@ -53,15 +53,21 @@ namespace YAE
 #       endif 
 
     public:
+        
+        /**
+         *  @brief
+         *      Returns the current application.
+         */
+        static Application& Current();
 
         /**
-         * @brief 
+         *  @brief
          *     Creates a new Application instance.
          */
         Application();
 
         /**
-         * @brief 
+         *  @brief
          *     Virtual destructor.
          */
         virtual ~Application();
