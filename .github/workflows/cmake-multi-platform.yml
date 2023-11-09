@@ -48,6 +48,9 @@ jobs:
             c_compiler: cl
           - os: macos-latest
             c_compiler: cl
+            cpp_compiler: g++
+          - os: macos-latest
+            c_compiler: gcc
 
     steps:
     - uses: actions/checkout@v3
