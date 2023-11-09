@@ -1,0 +1,5 @@
+if (APPLE OR IOS)
+    set(YAE_PROJECT_LANGUAGES CXX OBJCXX)
+else ()
+    set(YAE_PROJECT_LANGUAGES CXX)
+endif ()
