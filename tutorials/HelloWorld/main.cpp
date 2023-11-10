@@ -11,6 +11,17 @@
 
 #include <YAE/YAE.h>
 
+class MainView : public YAE::View
+{
+public:
+    using View::View;
+    
+protected:
+    void layoutChildren() {
+        std::cout << "MainView: layouting..." << std::endl;
+    }
+};
+
 class MainWin : public YAE::Window
 {
 public:
@@ -19,6 +30,9 @@ public:
 YAE_EVENTS:
     void beforeClose() {
         YAE::Application::Current().terminate();
+    }
+    void resized(const YAE::Size& size) {
+        std::cout << "Window resized: " << size.width << "/" << size.height << std::endl;
     }
 };
 
@@ -31,6 +45,9 @@ protected:
         mWindow = YAE::Make < MainWin >(YAE::Rect{
             {}, { 1024, 768 }
         });
+        
+        mWindow->setTitle("Window Title here!");
+        mWindow->setContentView(YAE::Make < MainView >());
         mWindow->show();
     }
 };

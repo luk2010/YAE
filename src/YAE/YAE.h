@@ -14,6 +14,8 @@
 
 #include "YAE/Application.h"
 #include "YAE/Common.h"
+#include "YAE/Error.h"
+#include "YAE/View.h"
 #include "YAE/Window.h"
 
 #endif 

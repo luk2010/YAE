@@ -18,8 +18,10 @@
 #include <sstream>
 #include <iostream>
 #include <memory>
+#include <string_view>
+#include <atomic>
 
-#if YAE_LIB_OSX 
+#if YAE_LIB_OSX
 
 #   ifndef __OBJC__
 #       define YAE_OSX_ID(KLASS) void*

@@ -13,6 +13,7 @@
 #define __YAE_WINDOW_H__
 
 #include "YAE/Common.h"
+#include "YAE/View.h"
 
 namespace YAE 
 {
@@ -22,7 +23,9 @@ namespace YAE
      */
     class Window 
     {
-    private:
+        //! @brief The content view.
+        Ref < View > mContentView;
+        
 #       if YAE_LIB_OSX
 
         //! @brief The NSWindow handle.
@@ -88,6 +91,55 @@ namespace YAE
          */
         virtual void close();
         
+        /**
+         *  @brief
+         *      Returns the window frame, including the title bar.
+         */
+        virtual Rect frame() const;
+        
+        /**
+         *  @brief
+         *      Sets the window frame, including the title bar.
+         */
+        virtual void setFrame(const Rect& frame);
+        
+        /**
+         *  @brief
+         *      Returns the content region size.
+         */
+        virtual Size contentSize() const;
+        
+        /**
+         *  @brief
+         *      Sets the window content size, i.e. the window size minus the
+         *      title bar.
+         */
+        virtual void setContentSize(const Size& size);
+        
+        /**
+         *  @brief
+         *      Returns the window title.
+         */
+        virtual std::string_view title() const;
+        
+        /**
+         *  @brief
+         *      Sets the window title.
+         */
+        virtual void setTitle(const std::string_view& title);
+        
+        /**
+         *  @brief
+         *      Returns the content view.
+         */
+        inline auto contentView() const { return mContentView; }
+        
+        /**
+         *  @brief
+         *      Sets the content view.
+         */
+        void setContentView(const Ref < View >& view);
+        
     YAE_EVENTS:
         
         /**
@@ -95,6 +147,12 @@ namespace YAE
          *      Called before the window closes.
          */
         virtual void beforeClose() {}
+        
+        /**
+         *  @brief
+         *      Called after the window did resize.
+         */
+        virtual void resized(const Size& size) {}
     };
 }
 
