@@ -20,6 +20,7 @@
 #include <memory>
 #include <string_view>
 #include <atomic>
+#include <vector>
 
 #if YAE_LIB_OSX
 
