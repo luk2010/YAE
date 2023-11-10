@@ -72,6 +72,8 @@ namespace YAE
         
         didAddChild(*child);
         setNeedsLayout(true);
+
+        return child;
     }
     
     void View::update()

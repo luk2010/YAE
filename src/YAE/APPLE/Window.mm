@@ -36,12 +36,12 @@
 
 - (void)windowDidResize:(NSNotification *)notification
 {
-    NSWindow* window = self.window->handle();
-    NSSize size = window.frame.size;
+    NSWindow* _window = self.window->handle();
+    NSSize size = _window.frame.size;
     
     auto view = self.window->contentView();
     if (view)
-        view->setFrame({ {}, YAE::Size::FromCGSize(window.contentLayoutRect.size) });
+        view->setFrame({ {}, YAE::Size::FromCGSize(_window.contentLayoutRect.size) });
     
     self.window->resized(YAE::Size{ size.width, size.height });
 }
