@@ -17,6 +17,9 @@
 
 namespace YAE
 {
+    //! @brief Defines a Glyph index.
+    typedef unsigned short GlyphId;
+    
     /**
      *  @brief
      *      A native raw font.
@@ -68,13 +71,19 @@ namespace YAE
          *  @brief
          *      Returns a list of glyph indices for the given string.
          */
-        std::vector < std::size_t > glyphsForString(const std::string_view& string) const;
+        std::vector < GlyphId > glyphsForString(const std::string_view& string) const;
         
         /**
          *  @brief
          *      Returns the path for a given glyph index.
          */
-        Ref < Path > pathForGlyph(std::size_t glyph) const;
+        Ref < Path > pathForGlyph(GlyphId glyph) const;
+        
+        /**
+         *  @brief
+         *      Returns the advances for a set of glyphs.
+         */
+        std::vector < Size > advancesForGlyphs(const std::vector < GlyphId >& glyphs) const;
     };
 }
 

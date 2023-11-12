@@ -31,27 +31,28 @@ namespace YAE
         return res;
     }
     
-    std::vector < std::size_t > Font::glyphsForString(const std::string_view& string) const
+    std::vector < GlyphId > Font::glyphsForString(const std::string_view& string) const
     {
-        CFStringRef _string = CFStringCreateWithBytes(NULL, string.data(), string.length(), kCFStringEncodingUTF8, YES);
+        NSString* _string = [[NSString alloc] initWithBytes:string.data()
+                                                     length:string.length()
+                                                   encoding:NSUTF8StringEncoding];
         
-        std::vector < std::size_t > glyphs;
-        std::vector < CGGlyph > _glyphs;
-        _glyphs.resize(string.length());
+        NSUInteger bufferLength = [_string lengthOfBytesUsingEncoding:NSUTF16StringEncoding] + 1;
+        UTF16Char* buffer = (UTF16Char*) malloc(bufferLength);
+        [_string getCharacters:buffer range:NSMakeRange(0, _string.length)];
+        
+        std::vector < GlyphId > glyphs;
+        glyphs.resize(string.length(), 0);
         
         CTFontGetGlyphsForCharacters(mHandle, 
-                                     CFStringGetCharactersPtr(_string),
-                                     &_glyphs[0],
+                                     buffer,
+                                     (CGGlyph*) glyphs.data(),
                                      string.length());
-        
-        glyphs.insert(glyphs.end(), _glyphs.begin(), _glyphs.end());
-        
-        CFRelease(_string);
         
         return glyphs;
     }
     
-    Ref < Path > Font::pathForGlyph(std::size_t glyph) const
+    Ref < Path > Font::pathForGlyph(GlyphId glyph) const
     {
         CGPathRef _path = CTFontCreatePathForGlyph(mHandle,
                                                    static_cast < CGGlyph >(glyph),
@@ -61,5 +62,19 @@ namespace YAE
             return nullptr;
     
         return Make < Path >(_path);
+    }
+    
+    std::vector < Size > Font::advancesForGlyphs(const std::vector < GlyphId >& glyphs) const
+    {
+        std::vector < Size > advances;
+        advances.resize(glyphs.size(), Size());
+        
+        CTFontGetAdvancesForGlyphs(mHandle,
+                                   kCTFontOrientationDefault,
+                                   (const CGGlyph*) &glyphs[0],
+                                   (CGSize*) &advances[0],
+                                   (CGFloat) glyphs.size());
+        
+        return advances;
     }
 }

@@ -13,8 +13,14 @@
 #define __YAE_YAE_H__
 
 #include "YAE/Application.h"
+#include "YAE/Color.h"
 #include "YAE/Common.h"
 #include "YAE/Error.h"
+#include "YAE/Font.h"
+#include "YAE/FontManager.h"
+#include "YAE/GlyphRun.h"
+#include "YAE/Path.h"
+#include "YAE/TextAttributes.h"
 #include "YAE/View.h"
 #include "YAE/Window.h"
 

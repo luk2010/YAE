@@ -21,6 +21,7 @@
 #include <string_view>
 #include <atomic>
 #include <vector>
+#include <optional>
 
 #if YAE_LIB_OSX
 

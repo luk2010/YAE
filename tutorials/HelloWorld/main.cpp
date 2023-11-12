@@ -13,11 +13,20 @@
 
 class HeaderView : public YAE::View
 {
+    YAE::Ref < YAE::GlyphRun > mGlyphRun;
+    
 public:
     
     HeaderView()
     {
         setBackgroundColor({ 0.4, 0.3, 0.2, 1.0 });
+    }
+    
+protected:
+    
+    void didAttach()
+    {
+        mGlyphRun = YAE::Make < YAE::GlyphRun >("Hello World!", YAE::TextAttributes(), YAE::Point{ 10, 10 });
     }
 };
 
