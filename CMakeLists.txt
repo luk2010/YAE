@@ -19,9 +19,11 @@ target_include_directories(YAE PRIVATE src)
 
 if (APPLE) 
 
-    find_library(YAE_LIB_COCOA Cocoa)
-    find_library(YAE_LIB_CF CoreFoundation)
-    target_link_libraries(YAE PRIVATE ${YAE_LIB_COCOA} ${YAE_LIB_CF})
+    find_library(YAE_LIB_COCOA Cocoa REQUIRED)
+    find_library(YAE_LIB_CF CoreFoundation REQUIRED)
+    find_library(YAE_LIB_CORETEXT CoreText REQUIRED)
+    find_library(YAE_LIB_COREGRAPHICS CoreGraphics REQUIRED)
+    target_link_libraries(YAE PRIVATE ${YAE_LIB_COCOA} ${YAE_LIB_CF} ${YAE_LIB_CORETEXT} ${YAE_LIB_COREGRAPHICS})
 
     if (NOT IOS)
 

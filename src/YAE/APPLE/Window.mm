@@ -40,8 +40,12 @@
     NSSize size = _window.frame.size;
     
     auto view = self.window->contentView();
+    
     if (view)
+    {
         view->setFrame({ {}, YAE::Size::FromCGSize(_window.contentLayoutRect.size) });
+        view->update();
+    }
     
     self.window->resized(YAE::Size{ size.width, size.height });
 }
@@ -136,6 +140,7 @@ namespace YAE
         if (view) {
             mHandle.contentView = view->handle();
             mContentView->setFrame({ {}, contentSize() });
+            mContentView->didAttach();
         }
         else
             mHandle.contentView = nil;

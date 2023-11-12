@@ -24,12 +24,15 @@
 
 #if YAE_LIB_OSX
 
+#   include <CoreFoundation/CoreFoundation.h>
+#   include <CoreText/CoreText.h>
+#   include <CoreGraphics/CoreGraphics.h>
+
 #   ifndef __OBJC__
 #       define YAE_OSX_ID(KLASS) void*
 #       define YAE_OSX_IT(KLASS) void* 
 #       define YAE_EVENTS protected
-#   else  
-#       include <CoreFoundation/CoreFoundation.h>
+#   else
 #       include <Cocoa/Cocoa.h>
 #       define YAE_OSX_ID(KLASS) KLASS*
 #       define YAE_OSX_IT(KLASS) id<KLASS>

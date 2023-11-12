@@ -19,6 +19,23 @@
 
 @synthesize view;
 
+- (instancetype) initWithFrame:(NSRect)frameRect
+{
+    self = [super initWithFrame:frameRect];
+    
+    if (self) {
+        self.wantsLayer = YES;
+    }
+    
+    return self;
+}
+
+- (BOOL)isFlipped
+{
+    return YES;
+}
+
+
 @end
 
 namespace YAE
@@ -33,7 +50,9 @@ namespace YAE
     View::View(const Rect& frameRect):
     mHandle(nil)
     {
-        mHandle = [[NSView alloc] initWithFrame:Rect::ToCGRect(frameRect)];
+        CustomView* view = (CustomView*)(
+        mHandle = [[CustomView alloc] initWithFrame:Rect::ToCGRect(frameRect)]);
+        view.view = this;
     }
     
     View::~View()
@@ -83,5 +102,15 @@ namespace YAE
         
         for (auto& child : mChildren)
             child->update();
+    }
+    
+    Color View::backgroundColor() const
+    {
+        return Color::FromNSColor([NSColor colorWithCGColor:mHandle.layer.backgroundColor]);
+    }
+    
+    void View::setBackgroundColor(const Color& color)
+    {
+        mHandle.layer.backgroundColor = Color::ToNSColor(color).CGColor;
     }
 }

@@ -13,6 +13,7 @@
 #define __YAE_VIEW_H__
 
 #include "YAE/Common.h"
+#include "YAE/Color.h"
 
 namespace YAE
 {
@@ -118,7 +119,7 @@ namespace YAE
          *      returns `false`, the child is not inserted. It then calls `didAttach()` on the
          *      child and `didAddChild(child)` on the parent.
          */
-        virtual Ref < View > addChild(const Ref < View >& child, const Ref < View >& beforeHint);
+        virtual Ref < View > addChild(const Ref < View >& child, const Ref < View >& beforeHint = nullptr);
         
         /**
          *  @brief
@@ -131,6 +132,18 @@ namespace YAE
          *      Updates the view.
          */
         void update();
+        
+        /**
+         *  @brief
+         *      Returns the background color.
+         */
+        virtual Color backgroundColor() const;
+        
+        /**
+         *  @brief
+         *      Sets the background color.
+         */
+        virtual void setBackgroundColor(const Color& color);
         
     YAE_EVENTS:
         
