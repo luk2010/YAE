@@ -50,6 +50,31 @@ namespace YAE
 
     private:
 
+#       elif YAE_LIB_X11
+
+        //! @brief The Window handle.
+        ::Window mHandle; 
+
+        //! @brief The window graphics context.
+        ::GC mGC;
+
+        //! @brief The window display.
+        ::Display* mDpy;
+
+    public:
+
+        /**
+         *  @brief 
+         *      Returns the window handle.
+         */
+        inline ::Window handle() const { return mHandle; }
+
+        /**
+         *  @brief 
+         *      Returns the window graphics context.
+         */
+        inline ::GC GC() const { return mGC; }
+
 #       endif
 
     public:
@@ -78,6 +103,12 @@ namespace YAE
          *      The window style.
          */
         Window(const Rect& frameRect, Style style = Default);
+
+        /**
+         *  @brief 
+         *      Destructor.
+         */
+        virtual ~Window();
 
         /**
          * @brief 

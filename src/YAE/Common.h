@@ -41,6 +41,13 @@
 #       define YAE_EVENTS public
 #   endif 
 
+#elif YAE_LIB_X11
+
+#   include <X11/Xlib.h>
+#   include <X11/Xutil.h>
+
+#   define YAE_EVENTS protected
+
 #else  
 
 #   define YAE_EVENTS protected
