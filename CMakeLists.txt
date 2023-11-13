@@ -57,9 +57,23 @@ elseif (WIN32)
     message(STATUS "YAE: Added WIN support.")
     set(YAE_LIB_WIN 1)
 
+elseif (UNIX)
+
+    find_package(X11 REQUIRED)
+
+    file(GLOB YAE_SOURCES_X11 "src/YAE/X11/*.cpp")
+    file(GLOB YAE_HEADERS_X11 "src/YAE/X11/*.h")
+
+    target_sources(YAE PRIVATE ${YAE_SOURCES_X11} ${YAE_HEADERS_X11})
+    target_include_directories(YAE PUBLIC ${X11_INCLUDE_DIR})
+    target_link_libraries(YAE PRIVATE ${X11_LIBRARIES})
+
+    message(STATUS "YAE: Selected GUI Platform X11.")
+    set(YAE_LIB_X11 1)
+
 else () 
 
-    message(FATAL "YAE: Platform not supported for now.")
+    message(FATAL_ERROR "YAE: Platform not supported for now.")
     
 endif ()
 
