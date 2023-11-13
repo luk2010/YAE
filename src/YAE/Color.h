@@ -27,6 +27,14 @@ namespace YAE
         float blue = 0;
         float alpha = 0;
 
+        inline bool operator == (const Color& rhs) const 
+        {
+            return red == rhs.red 
+                && green == rhs.green 
+                && blue == rhs.blue 
+                && alpha == rhs.alpha;
+        }
+
 #       if YAE_LIB_OSX && defined(__OBJC__)
 
         static inline NSColor* ToNSColor(const Color& rhs)

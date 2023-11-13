@@ -31,6 +31,15 @@ namespace YAE
         //! to the beginning of the line surrrounding the run.
         std::vector < Point > mPositions;
         
+        //! @brief The array of advances for each glyph to render.
+        std::vector < Size > mAdvances;
+        
+        //! @brief The total advance of the run.
+        Size mRunAdvance;
+        
+        //! @brief The run origin.
+        Point mOrigin;
+        
         //! @brief The attributes used to render the glyphs.
         TextAttributes mAttributes;
         
@@ -83,6 +92,18 @@ namespace YAE
          *      Returns the string used to render the glyphs.
          */
         const std::string_view& string() const;
+        
+        /**
+         *  @brief
+         *      Returns the total advance for the run.
+         */
+        Size runAdvance() const; 
+        
+        /**
+         *  @brief
+         *      Returns the run origin.
+         */
+        const Point& origin() const { return mOrigin; }
     };
 }
 

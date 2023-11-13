@@ -29,6 +29,31 @@ namespace YAE
         
         //! @brief The font used to render the text.
         Ref < Font > font;
+
+        /**
+         *  @brief 
+         *      Merges this attribute with another attributes.
+         */
+        inline TextAttributes& merge(const TextAttributes& rhs)
+        {
+            if (rhs.color.has_value()) {
+                color = rhs.color;
+            }
+            if (rhs.font) {
+                font = rhs.font;
+            }
+            return *this;
+        }
+
+        /**
+         *  @brief 
+         *      Returns true if the attributes are equal.
+         */
+        inline bool isEqual(const TextAttributes& rhs) const  
+        {
+            return color.value_or(Color()) == rhs.color.value_or(Color())
+                && font == rhs.font;
+        }
     };
 }
 

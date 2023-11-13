@@ -128,6 +128,16 @@ namespace YAE
 
 #       endif 
     };
+
+    /**
+     *  @brief 
+     *      A normal range.
+     */
+    struct Range
+    {
+        std::size_t start = 0;
+        std::size_t length = 0;
+    };
 }
 
 #endif 

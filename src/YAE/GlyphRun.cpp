@@ -18,6 +18,7 @@ namespace YAE
     {
         mString = string;
         mAttributes = attributes;
+        mOrigin = origin;
 
         if (!attributes.font) {
             mAttributes.font = FontManager::Get().font("Arial", 16, (FontTraitMask) FontTrait::Regular);
@@ -25,14 +26,17 @@ namespace YAE
 
         mGlyphs = mAttributes.font->glyphsForString(string);
         mPositions.resize(string.length(), Point());
-        auto advances = mAttributes.font->advancesForGlyphs(mGlyphs);
+        mAdvances = mAttributes.font->advancesForGlyphs(mGlyphs);
         Point cursor = origin;
 
         for (auto i = 0; i < mGlyphs.size(); ++i) {
             mPositions[i] = cursor;
-            cursor.x += advances[i].width;
-            cursor.y += advances[i].height;
+            cursor.x += mAdvances[i].width;
+            cursor.y += mAdvances[i].height;
         }
+        
+        mRunAdvance.width = cursor.x - origin.x;
+        mRunAdvance.height = cursor.y - origin.y;
     }
 
     std::size_t GlyphRun::numberOfGlyphs() const 
@@ -58,5 +62,10 @@ namespace YAE
     const std::string_view& GlyphRun::string() const 
     {
         return mString;
+    }
+    
+    Size GlyphRun::runAdvance() const
+    {
+        return mRunAdvance;
     }
 }
