@@ -26,7 +26,10 @@ protected:
     
     void didAttach()
     {
-        mGlyphRun = YAE::Make < YAE::GlyphRun >("Hello World!", YAE::TextAttributes(), YAE::Point{ 10, 10 });
+        YAE::TextAttributes attributes;
+        attributes.color = YAE::Color{ 1, 1, 1, 1 };
+        attributes.font = YAE::FontManager::Get().font("Courier New", 24, (YAE::FontTraitMask) YAE::FontTrait::Italic);
+        mGlyphRun = YAE::Make < YAE::GlyphRun >("Hello World!", attributes, YAE::Point{ 10, 10 });
     }
 };
 

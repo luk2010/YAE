@@ -51,7 +51,7 @@ namespace YAE
          *  @brief
          *      Sets the current NSView handle and returns the old handle.
          */
-        virtual void* setHandle(void* handle);
+        virtual id setHandle(id handle);
         
 #       endif
         

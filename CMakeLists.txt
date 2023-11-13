@@ -17,6 +17,11 @@ file(GLOB YAE_HEADERS_COMMON src/YAE/*.h)
 add_library(YAE SHARED ${YAE_SOURCES_COMMON} ${YAE_HEADERS_COMMON})
 target_include_directories(YAE PRIVATE src)
 
+set_target_properties(
+    YAE PROPERTIES 
+    XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC YES   
+)
+
 if (APPLE) 
 
     find_library(YAE_LIB_COCOA Cocoa REQUIRED)

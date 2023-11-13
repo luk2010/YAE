@@ -25,6 +25,7 @@
 
 #if YAE_LIB_OSX
 
+#   include <objc/objc-runtime.h>
 #   include <CoreFoundation/CoreFoundation.h>
 #   include <CoreText/CoreText.h>
 #   include <CoreGraphics/CoreGraphics.h>

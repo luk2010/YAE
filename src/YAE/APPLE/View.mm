@@ -40,7 +40,7 @@
 
 namespace YAE
 {
-    void* View::setHandle(void* handle)
+    id View::setHandle(id handle)
     {
         NSView* old = mHandle;
         mHandle = (NSView*) handle;
